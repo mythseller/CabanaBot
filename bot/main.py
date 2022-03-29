@@ -20,137 +20,70 @@ async def on_message(message):
     if message.author.bot:
         return
     guild = message.guild
-    # Fetch target channels
-    target1_channel = guild.get_channel(879466084116336660)
-    target2_channel = guild.get_channel(882606056184897536)
-    target3_channel = guild.get_channel(879468481492447254)
-    target4_channel = guild.get_channel(879467246953570305)
-    # Fetch target roles
-    role_1 = guild.get_role(942052888333676634)
-    role_2 = guild.get_role(942051860167159819)
-    role_3 = guild.get_role(942052324615004250)
-    role_4 = guild.get_role(942052501228777493)
-    role_5 = guild.get_role(942052699921321984)
-    role_6 = guild.get_role(942052789100617728)
-    role_7 = guild.get_role(950706317482410015)
+    # Identify target channels just get the channel ID
+    alerts_channel = guild.get_channel(123456789)
+    # target roles, again just the role ID. Change the names to fit your use case. 
+    alert_role = guild.get_role(123456789)
 
-    if role_1 in message.role_mentions:
-        msg = message.content.strip(f"<@&{role_1.id}>")
+    
+    if alerts_role in message.role_mentions:
+        # Primary Alert Format
+        msg = message.content.strip(f"<@&{alerts_role.id}>")
         embed = discord.Embed(
-            title="Market Commentary",
-            description=msg,
-            color=0x0be60b,
-            timestamp=datetime.now(),
-        )
-        embed.add_field(name="Index:", value=role_1.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        embed2 = discord.Embed(
             title=msg,
-            color=0x0be60b,
+            #changes the color on the left hand side of embed
+            color=0x349434, 
             timestamp=datetime.now(),
         )
-        embed2.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        await target2_channel.send("<@&942052888333676634>")
-        await target2_channel.send(embed=embed)
-        await target3_channel.send(embed=embed2)
-        await message.channel.send(embed=embed)
-
-    elif role_2 in message.role_mentions:
-        # intraday
-        msg = message.content.strip(f"<@&{role_2.id}>")
-        embed = discord.Embed(title=msg, color=0x349434, timestamp=datetime.now())
-        embed.add_field(name="Risk level:", value=role_2.mention)
+        #embed.add_field(
+            # replace the "risk level" with whatever text you want, but this will mention role again. might delete this actually
+            #name="Risk level:",
+            #value=alert_role.mention,
+        #)
         embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
+            name=message.author.display_name,
+            icon_url=message.author.avatar_url,
         )
-        noti2 = await target1_channel.send(msg + " -- " + "<@&942051860167159819>")
+        # noti2 alerts the role. Embeds cannot mention roles so thats why this is here.
+        noti2 = await alerts_channel.send(msg + f"<@&{alerts_role.id}>")
         await noti2.delete()
-        target2 = await target1_channel.send(embed=embed)
+        # Below line sends alert to your target channel
+        target2 = await alerts_channel.send(embed=embed)
+        # This line repeats the alert in whatever channel it was called out in. i like it cause it makes alerts stand out.
         message2 = await message.channel.send(embed=embed)
+        # This adds emojis. optional 
         await message2.add_reaction("📥")
         await message2.add_reaction("❌")
         await target2.add_reaction("🟢")
         await target2.add_reaction("🔴")
 
+        
+    #elif role_2 in message.role_mentions:
+    # Longform Format useful for briefs  
+    #    msg = message.content.strip(f"<@&{spy_role.id}>")
+    #    embed = discord.Embed(
+    #        title="Market Commentary",
+    #        description=msg,
+    #        color=0x0be60b,
+    #        timestamp=datetime.now(),
+    #    )
+    #    embed.add_field(name="Index:", value=spy_role.mention)
+    #    embed.set_author(
+    #        name=message.author.display_name, icon_url=message.author.avatar_url
+    #    )
+    #    embed2 = discord.Embed(
+    #        title=msg,
+    #        color=0x0be60b,
+    #        timestamp=datetime.now(),
+    #    )
+    #    embed2.set_author(
+    #        name=message.author.display_name, icon_url=message.author.avatar_url
+    #    )
+    #    await second_channel.send("<@&942052888333676634>")
+    #    await second_channel.send(embed=embed)
+    #    await target3_channel.send(embed=embed2)
+    #    await message.channel.send(embed=embed)
 
-    elif role_3 in message.role_mentions:
-        #scalp
-        msg = message.content.strip(f"<@&{role_3.id}>")
-        embed = discord.Embed(title=msg, color=0x782ea6, timestamp=datetime.now())
-        embed.add_field(name="Risk level:", value=role_3.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        noti3 = await target1_channel.send(msg + " -- " + "<@&942052324615004250>")
-        await noti3.delete()
-        target3 = await target1_channel.send(embed=embed)
-        message3 = await message.channel.send(embed=embed)
-        await message3.add_reaction("📥")
-        await message3.add_reaction("❌")
-        await target3.add_reaction("🟢")
-        await target3.add_reaction("🔴")
-        
-    elif role_4 in message.role_mentions:
-        #risky
-        msg = message.content.strip(f"<@&{role_4.id}>")
-        embed = discord.Embed(title=msg, color=0xc45a25, timestamp=datetime.now())
-        embed.add_field(name="Risk level:", value=role_4.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        noti4 = await target1_channel.send(msg + " -- " + "<@&942052501228777493>")
-        await noti4.delete()
-        target4 = await target1_channel.send(embed=embed)
-        message4 = await message.channel.send(embed=embed)
-        await message4.add_reaction("📥")
-        await message4.add_reaction("❌")
-        await target4.add_reaction("🟢")
-        await target4.add_reaction("🔴")
-        
-    elif role_5 in message.role_mentions:
-        #lotto
-        msg = message.content.strip(f"<@&{role_5.id}>")
-        embed = discord.Embed(title=msg, color=0xe31e87, timestamp=datetime.now())
-        embed.add_field(name="Risk level:", value=role_5.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        noti5 = await target1_channel.send(msg + " -- " + "<@&942052699921321984>")
-        await noti5.delete()
-        target5 = await target1_channel.send(embed=embed)
-        message5 = await message.channel.send(embed=embed)
-        await message5.add_reaction("🎲")
-        await message5.add_reaction("️❌")
-        await target5.add_reaction("🟢")
-        await target5.add_reaction("🔴")
-        
-    elif role_6 in message.role_mentions:
-        # futures
-        msg = message.content.strip(f"<@&{role_6.id}>")
-        embed = discord.Embed(title=msg, color=0xe0dd12, timestamp=datetime.now())
-        embed.add_field(name="Trade Type:", value=role_6.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-        await target3_channel.send(embed=embed)
-   
-    elif role_7 in message.role_mentions:
-        # goblin mode
-        msg = message.content.strip(f"<@&{role_7.id}>")
-        embed = discord.Embed(title="said some dumb shit", description=msg, color=0xe31e87, timestamp=datetime.now())
-        embed.add_field(name="we goin", value=role_7.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
-        )
-
-        target7 = await target4_channel.send(embed=embed)
-        message7 = await message.channel.send(embed=embed)
-        await message7.add_reaction("😩")
-        await target7.add_reaction("😩")
 
 @bot.listen()
 async def on_message(message):
