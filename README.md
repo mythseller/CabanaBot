@@ -1,6 +1,9 @@
-# Hosting your discord.py bot on Heroku
+# Hosting your CalloutBot on Heroku
 ### What are the prerequisites for this guide?
-You must have an account for Discord [[Link](https://discordapp.com/developers/applications/)], GitHub [[Link](https://github.com/join)] , and Heroku [[Link](https://signup.heroku.com/)].
+You must have an account for 
+* Discord [[Link](https://discordapp.com/developers/applications/)]
+* GitHub [[Link](https://github.com/join)]  
+* Heroku [[Link](https://signup.heroku.com/)]
 
 ### How do I create a bot and get a bot token?
 * Create an application in the developer portal by clicking [here](https://discordapp.com/developers/applications/)
@@ -24,6 +27,18 @@ You must have an account for Discord [[Link](https://discordapp.com/developers/a
   * Click 'Confirm' to finalize the decision.
   * NOTE: You are allocated 550 free Dyno hours, which will not last the entire month. However, if you provide a credit card to verify your identity, you are given an additional 450 hours, which will allow your bot to run indefinitely.
 
-# TO-DO LIST
-* Revise the tutorial to be easier to understand for any user.
-* Add some images for following along with the process.
+### Add the bot to your discord
+* Head to your Discord Developer Portal [here](https://discord.com/developers/applications/) and select your bot.
+* Click 'OAuth2' then 'URL Generator'
+* Select 'bot' then select the following options
+  * Read Messages/View Channels
+  * Send Messages
+  * Manage Messages
+  * Embed Links
+  * Attach Files
+  * Read Message History
+ * Copy the generated URL and paste it into your browser.
+ * You should of now added the bot. if your alert or chat channels are protected you might need to give bot access. 
+
+### Adding your roles and getting IDs
+* todo
