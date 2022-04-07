@@ -22,28 +22,35 @@ async def on_message(message):
     guild = message.guild
     # Identify target channels just get the channel ID
     alerts_channel = guild.get_channel(123456789)
+    memes_channel = guild.get_channel(123456789)
     # target roles, again just the role ID. Change the names to fit your use case. 
-    alert_role = guild.get_role(123456789)
+    lotto_role = guild.get_role(123456789)
+    intraday_role = guild.get_role(123456789)
+    swing_role = guild.get_role(123456789)
+    futures_role = guild.get_role(123456789)
+    memes_role = guild.get_role(123456789)
 
     
-    if alerts_role in message.role_mentions:
+    if lotto_role in message.role_mentions:
         # Primary Alert Format
-        msg = message.content.strip(f"<@&{alerts_role.id}>")
+        msg = message.content.strip(f"<@&{lotto_role.id}>")
         embed = discord.Embed(
             title=msg,
             #changes the color on the left hand side of embed
             color=0x349434, 
             timestamp=datetime.now(),
         )
-        #embed.add_field(
+        embed.add_field(
             # replace the "risk level" with whatever text you want, but this will mention role again. might delete this actually
-            #name="Risk level:",
+            name="Risk level:",
             #value=alert_role.mention,
-        #)
+            value="Lotto",
+        )
         embed.set_author(
             name=message.author.display_name,
             icon_url=message.author.avatar_url,
         )
+        embed.set_thumbnail(url=message.author.avatar_url)
         # noti2 alerts the role. Embeds cannot mention roles so thats why this is here.
         noti2 = await alerts_channel.send(msg + f"<@&{alerts_role.id}>")
         await noti2.delete()
