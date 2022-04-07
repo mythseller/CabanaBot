@@ -29,39 +29,32 @@ async def on_message(message):
     futures_role = guild.get_role(123456789)
     memes_role = guild.get_role(123456789)
 
-    
     if lotto_role in message.role_mentions:
-        # Primary Alert Format
         msg = message.content.strip(f"<@&{lotto_role.id}>")
         embed = discord.Embed(
             title=msg,
-            #changes the color on the left hand side of embed
-            color=0xad1357, 
+            color=0xe0dd12,
             timestamp=datetime.now(),
         )
-        embed.add_field(
-            # replace the "risk level" with whatever text you want, but this will mention role again. might delete this actually
-            name="Risk level:",
-            #value=alert_role.mention,
-            value="Lotto",
-        )
+        embed.add_field(name="Trade type:", value=lotto_role.mention)
         embed.set_author(
-            name=message.author.display_name,
-            icon_url=message.author.avatar_url,
+            name=message.author.display_name, icon_url=message.author.avatar_url
         )
-        embed.set_thumbnail(url=message.author.avatar_url)
-        # noti2 alerts the role. Embeds cannot mention roles so thats why this is here.
-        noti2 = await alerts_channel.send(msg + f"<@&{alerts_role.id}>")
-        await noti2.delete()
-        # Below line sends alert to your target channel
-        target2 = await alerts_channel.send(embed=embed)
-        # This line repeats the alert in whatever channel it was called out in. i like it cause it makes alerts stand out.
-        message2 = await message.channel.send(embed=embed)
-        # This adds emojis. optional 
-        await message2.add_reaction("📥")
-        await message2.add_reaction("❌")
-        await target2.add_reaction("🟢")
-        await target2.add_reaction("🔴")
+        noti1 = await alerts_channel.send(msg + " - " + "<@&961515684351868998>")
+        await noti1.delete()
+        await alerts_channel.send(embed=embed)
+
+    elif role_2 in message.role_mentions:
+        msg = message.content.strip(f"<@&{role_2.id}>")
+        embed = discord.Embed(title=msg, color=0xe0dd12, timestamp=datetime.now())
+        embed.add_field(name="Trade Type:", value=role_2.mention)
+        embed.set_author(
+            name=message.author.display_name, icon_url=message.author.avatar_url
+        )
+        await target1_channel.send(embed=embed)
+        await message.channel.send(embed=embed)
+        
+
 
         
     #elif role_2 in message.role_mentions:
