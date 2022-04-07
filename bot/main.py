@@ -50,7 +50,7 @@ async def on_message(message):
         await target.add_reaction("🟢")
         await target.add_reaction("🔴")
 
-    if intraday_role in message.role_mentions:
+    elif intraday_role in message.role_mentions:
         msg = message.content.strip(f"<@&{intraday_role.id}>")
         embed = discord.Embed(
             title=msg,
