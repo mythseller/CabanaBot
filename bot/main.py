@@ -26,14 +26,14 @@ async def on_message(message):
     lotto_role = guild.get_role(961515684351868998)
     intraday_role = guild.get_role(961533314500558868)
     swing_role = guild.get_role(961535201488547871)
-    futures_role = guild.get_role(961535339149811714)
+    futures_role = guild.get_role(936421263440748545)
     memes_role = guild.get_role(961535641533972492)
 
     if lotto_role in message.role_mentions:
         msg = message.content.strip(f"<@&{lotto_role.id}>")
         embed = discord.Embed(
             title=msg,
-            color=0xad1357,
+            color=0xe91e63,
             timestamp=datetime.now(),
         )
         embed.add_field(name="Trade type:", value="Lotto")
