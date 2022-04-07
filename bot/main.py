@@ -41,7 +41,7 @@ async def on_message(message):
             name=message.author.display_name 
         )
         embed.set_thumbnail(url=message.author.avatar_url)
-        noti1 = await alerts_channel.send(msg + " - " + "<@&{lotto_role.id}>")
+        noti1 = await alerts_channel.send(msg + " - " + f"<@&{lotto_role.id}>")
         # await noti1.delete()
         await alerts_channel.send(embed=embed)
         message = await message.channel.send(embed=embed)
