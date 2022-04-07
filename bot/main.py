@@ -33,16 +33,18 @@ async def on_message(message):
         msg = message.content.strip(f"<@&{lotto_role.id}>")
         embed = discord.Embed(
             title=msg,
-            color=0xe0dd12,
+            color=0xad1357,
             timestamp=datetime.now(),
         )
-        embed.add_field(name="Trade type:", value=lotto_role.mention)
+        embed.add_field(name="Trade type:", value="Lotto")
         embed.set_author(
             name=message.author.display_name, icon_url=message.author.avatar_url
         )
+        embed.set_thumbnail(url=message.author.avatar_url)
         noti1 = await alerts_channel.send(msg + " - " + "<@&961515684351868998>")
         await noti1.delete()
         await alerts_channel.send(embed=embed)
+        message1 = await message.channel.send(embed=embed)
 
     elif role_2 in message.role_mentions:
         msg = message.content.strip(f"<@&{role_2.id}>")
