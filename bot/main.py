@@ -24,7 +24,7 @@ async def on_message(message):
     alerts_channel = guild.get_channel(123456789)
     memes_channel = guild.get_channel(123456789)
     # target roles, again just the role ID. Change the names to fit your use case. 
-    lotto_role = guild.get_role(123456789)
+    lotto_role = guild.get_role(961515684351868998)
     intraday_role = guild.get_role(123456789)
     swing_role = guild.get_role(123456789)
     futures_role = guild.get_role(123456789)
@@ -37,7 +37,7 @@ async def on_message(message):
         embed = discord.Embed(
             title=msg,
             #changes the color on the left hand side of embed
-            color=0x349434, 
+            color=0xad1357, 
             timestamp=datetime.now(),
         )
         embed.add_field(
