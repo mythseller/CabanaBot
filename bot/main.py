@@ -21,8 +21,7 @@ async def on_message(message):
         return
     guild = message.guild
     # Identify target channels just get the channel ID
-    alerts_channel = guild.get_channel(123456789)
-    memes_channel = guild.get_channel(123456789)
+    alerts_channel = guild.get_channel(961396252774387713)
     # target roles, again just the role ID. Change the names to fit your use case. 
     lotto_role = guild.get_role(961515684351868998)
     intraday_role = guild.get_role(123456789)
