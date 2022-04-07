@@ -25,9 +25,9 @@ async def on_message(message):
     # target roles, again just the role ID. Change the names to fit your use case. 
     lotto_role = guild.get_role(961515684351868998)
     intraday_role = guild.get_role(961533314500558868)
-    swing_role = guild.get_role(123456789)
-    futures_role = guild.get_role(123456789)
-    memes_role = guild.get_role(123456789)
+    swing_role = guild.get_role(961535201488547871)
+    futures_role = guild.get_role(961535339149811714)
+    memes_role = guild.get_role(961535641533972492)
 
     if lotto_role in message.role_mentions:
         msg = message.content.strip(f"<@&{lotto_role.id}>")
@@ -71,10 +71,70 @@ async def on_message(message):
         await target.add_reaction("🟢")
         await target.add_reaction("🔴")
         
+    elif swing_role in message.role_mentions:
+        msg = message.content.strip(f"<@&{swing_role.id}>")
+        embed = discord.Embed(
+            title=msg,
+            color=0x3498db,
+            timestamp=datetime.now(),
+        )
+        embed.add_field(name="Trade type:", value="Swing")
+        embed.set_author(
+            name=message.author.display_name 
+        )
+        embed.set_thumbnail(url=message.author.avatar_url)
+        noti = await alerts_channel.send(msg + " - " + f"<@&{swing_role.id}>")
+        # await noti.delete()
+        target = await alerts_channel.send(embed=embed)
+        message = await message.channel.send(embed=embed)
+        await message.add_reaction("📥")
+        await message.add_reaction("❌")
+        await target.add_reaction("🟢")
+        await target.add_reaction("🔴")
         
+    elif futures_role in message.role_mentions:
+        msg = message.content.strip(f"<@&{futures_role.id}>")
+        embed = discord.Embed(
+            title=msg,
+            color=0xf1c40f,
+            timestamp=datetime.now(),
+        )
+        embed.add_field(name="Trade type:", value="Futures")
+        embed.set_author(
+            name=message.author.display_name 
+        )
+        embed.set_thumbnail(url=message.author.avatar_url)
+        noti = await alerts_channel.send(msg + " - " + f"<@&{futures_role.id}>")
+        # await noti.delete()
+        target = await alerts_channel.send(embed=embed)
+        message = await message.channel.send(embed=embed)
+        await message.add_reaction("📥")
+        await message.add_reaction("❌")
+        await target.add_reaction("🟢")
+        await target.add_reaction("🔴")        
 
-
+    elif memes_role in message.role_mentions:
+        msg = message.content.strip(f"<@&{memes_role.id}>")
+        embed = discord.Embed(
+            title=msg,
+            color=0xe74b3c,
+            timestamp=datetime.now(),
+        )
+        embed.add_field(name="Trade type:", value="Meme Play")
+        embed.set_author(
+            name=message.author.display_name 
+        )
+        embed.set_thumbnail(url=message.author.avatar_url)
+        noti = await alerts_channel.send(msg + " - " + f"<@&{memes_role.id}>")
+        # await noti.delete()
+        target = await alerts_channel.send(embed=embed)
+        message = await message.channel.send(embed=embed)
+        await message.add_reaction("📥")
+        await message.add_reaction("❌")
+        await target.add_reaction("🟢")
+        await target.add_reaction("🔴")
         
+       
     #elif role_2 in message.role_mentions:
     # Longform Format useful for briefs  
     #    msg = message.content.strip(f"<@&{spy_role.id}>")
