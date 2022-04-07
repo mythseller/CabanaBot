@@ -96,7 +96,7 @@ async def on_message(message):
         msg = message.content.strip(f"<@&{futures_role.id}>")
         embed = discord.Embed(
             title=msg,
-            color=0xf1c40f,
+            color=0x9b59b6,
             timestamp=datetime.now(),
         )
         embed.add_field(name="Trade type:", value="Futures")
