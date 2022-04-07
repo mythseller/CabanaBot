@@ -36,9 +36,9 @@ async def on_message(message):
             color=0xad1357,
             timestamp=datetime.now(),
         )
-        embed.add_field(name="Trade type:", value="Lotto")
+        embed.add_field(name="Trade type:", value=lotto_role.mention)
         embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
+            name=message.author.display_name 
         )
         embed.set_thumbnail(url=message.author.avatar_url)
         noti1 = await alerts_channel.send(msg + " - " + "<@&961515684351868998>")
