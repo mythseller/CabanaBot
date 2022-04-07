@@ -36,15 +36,19 @@ async def on_message(message):
             color=0xad1357,
             timestamp=datetime.now(),
         )
-        embed.add_field(name="Trade type:", value=lotto_role.mention)
+        embed.add_field(name="Trade type:", value="Lotto")
         embed.set_author(
             name=message.author.display_name 
         )
         embed.set_thumbnail(url=message.author.avatar_url)
-        noti1 = await alerts_channel.send(msg + " - " + "<@&961515684351868998>")
+        noti1 = await alerts_channel.send(msg + " - " + "<@&{lotto_role.id}>")
         # await noti1.delete()
         await alerts_channel.send(embed=embed)
-        message1 = await message.channel.send(embed=embed)
+        message = await message.channel.send(embed=embed)
+        await message.add_reaction("📥")
+        await message.add_reaction("❌")
+        await target.add_reaction("🟢")
+        await target.add_reaction("🔴")
 
     elif role_2 in message.role_mentions:
         msg = message.content.strip(f"<@&{role_2.id}>")
@@ -55,6 +59,7 @@ async def on_message(message):
         )
         await target1_channel.send(embed=embed)
         await message.channel.send(embed=embed)
+        
         
 
 
