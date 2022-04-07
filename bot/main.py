@@ -24,7 +24,7 @@ async def on_message(message):
     alerts_channel = guild.get_channel(961396252774387713)
     # target roles, again just the role ID. Change the names to fit your use case. 
     lotto_role = guild.get_role(961515684351868998)
-    intraday_role = guild.get_role(123456789)
+    intraday_role = guild.get_role(961533314500558868)
     swing_role = guild.get_role(123456789)
     futures_role = guild.get_role(123456789)
     memes_role = guild.get_role(123456789)
@@ -41,24 +41,35 @@ async def on_message(message):
             name=message.author.display_name 
         )
         embed.set_thumbnail(url=message.author.avatar_url)
-        noti1 = await alerts_channel.send(msg + " - " + f"<@&{lotto_role.id}>")
-        # await noti1.delete()
-        await alerts_channel.send(embed=embed)
+        noti = await alerts_channel.send(msg + " - " + f"<@&{lotto_role.id}>")
+        # await noti.delete()
+        target = await alerts_channel.send(embed=embed)
         message = await message.channel.send(embed=embed)
         await message.add_reaction("📥")
         await message.add_reaction("❌")
         await target.add_reaction("🟢")
         await target.add_reaction("🔴")
 
-    elif role_2 in message.role_mentions:
-        msg = message.content.strip(f"<@&{role_2.id}>")
-        embed = discord.Embed(title=msg, color=0xe0dd12, timestamp=datetime.now())
-        embed.add_field(name="Trade Type:", value=role_2.mention)
-        embed.set_author(
-            name=message.author.display_name, icon_url=message.author.avatar_url
+    if intraday_role in message.role_mentions:
+        msg = message.content.strip(f"<@&{intraday_role.id}>")
+        embed = discord.Embed(
+            title=msg,
+            color=0x2ecc71,
+            timestamp=datetime.now(),
         )
-        await target1_channel.send(embed=embed)
-        await message.channel.send(embed=embed)
+        embed.add_field(name="Trade type:", value="Intraday")
+        embed.set_author(
+            name=message.author.display_name 
+        )
+        embed.set_thumbnail(url=message.author.avatar_url)
+        noti = await alerts_channel.send(msg + " - " + f"<@&{intraday_role.id}>")
+        # await noti.delete()
+        target = await alerts_channel.send(embed=embed)
+        message = await message.channel.send(embed=embed)
+        await message.add_reaction("📥")
+        await message.add_reaction("❌")
+        await target.add_reaction("🟢")
+        await target.add_reaction("🔴")
         
         
 
